@@ -69,6 +69,7 @@ function game_screen()
     love.graphics.draw(gameOver, 90, 250)
   end
   
+  --write text
   love.graphics.print( "score is: "..score, 0, 0)
   
   --set pipe placement and movement
