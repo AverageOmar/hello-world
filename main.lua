@@ -8,10 +8,15 @@ function love.load()
   
   --draw images and set to variables
   background= love.graphics.newImage("sprites/bg.png")
+  background2= love.graphics.newImage("sprites/bg.png")
   backgroundQuad = love.graphics.newQuad(1,1,720/2,1280/2,720/2,1280/2)
+  background1X = 0
+  background2X = 720
   
   flappy = love.graphics.newImage("sprites/flappy.png")
   flappyPosY = 200
+  
+  ground = love.graphics.newImage("sprites/ground.png")
   
   flappyDead = love.graphics.newImage("sprites/flappydead.png")
   
@@ -33,6 +38,8 @@ function reset() -- reset game
   flappyPosY = 200
   alive = true
   jump = 2.5
+  pipePosX = 300
+  pipe2PosX = pipePosX
 end
 
 function flappyJump() --set the jump speed
@@ -68,6 +75,8 @@ function game_screen()
   if alive == false then
     love.graphics.draw(gameOver, 90, 250)
   end
+  
+  --love.graphics.draw(ground, 0, 500)
   
   --write text
   love.graphics.print( "score is: "..score, 0, 0)
