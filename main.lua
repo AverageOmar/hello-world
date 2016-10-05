@@ -5,6 +5,7 @@ function love.load()
   alive = true
   rotate = 0
   score = 0
+  colour = love.math.random(0, 2)
   
   --draw images and set to variables
   background= love.graphics.newImage("sprites/bg.png")
@@ -15,14 +16,19 @@ function love.load()
   
   flappy = love.graphics.newImage("sprites/flappy.png")
   flappyPosY = 200
+  flappyDead = love.graphics.newImage("sprites/flappydead.png")
+  
+  flappyBlue = love.graphics.newImage("sprites/flappyBlue.png")
+  flappyDeadBlue = love.graphics.newImage("sprites/flappydeadBlue.png")
+  
+  flappyYellow = love.graphics.newImage("sprites/flappyYellow.png")
+  flappyDeadYellow = love.graphics.newImage("sprites/flappydeadYellow.png")
   
   ground = love.graphics.newImage("sprites/ground.png")
   ground2 = love.graphics.newImage("sprites/ground.png")
   groundQuad = love.graphics.newQuad(1, 1, 360, 640, 360, 281)
   groundX = 0
   ground2X = 360
-  
-  flappyDead = love.graphics.newImage("sprites/flappydead.png")
   
   pipe = love.graphics.newImage("sprites/pipe.png")
   pipePosX = 300
@@ -34,6 +40,7 @@ function love.load()
 end
 
 function love.draw() -- draw screen
+  love.window.setIcon(flappy)
   love.graphics.draw(background, backgroundQuad, background1X, 0)
   love.graphics.draw(background2, backgroundQuad, background2X, 0)
   game_screen()
@@ -45,6 +52,7 @@ function reset() -- reset game
   jump = 2.5
   rotate = 0
   score = 0
+  colour = love.math.random(0, 2)
   pipePosX = 300
   pipe2PosX = pipePosX
 end
@@ -74,11 +82,31 @@ function game_screen()
   love.graphics.draw(ground, groundQuad, groundX, 500)
   love.graphics.draw(ground2, groundQuad, ground2X, 500)
   
-  if alive == true then
-    love.graphics.draw(flappy, 125, flappyPosY, math.rad(rotate), 1, 1, 22.5, 22.5)
+  if colour == 0 then
+    if alive == true then
+      love.graphics.draw(flappy, 125, flappyPosY, math.rad(rotate), 1, 1, 22.5, 22.5)
+    end
+    if alive == false then
+      love.graphics.draw(flappyDead, 125, flappyPosY, math.rad(rotate), 1, 1, 22.5, 22.5)
+    end
   end
-  if alive == false then
-    love.graphics.draw(flappyDead, 125, flappyPosY, math.rad(rotate), 1, 1, 22.5, 22.5)
+  
+  if colour == 1 then
+    if alive == true then
+      love.graphics.draw(flappyBlue, 125, flappyPosY, math.rad(rotate), 1, 1, 22.5, 22.5)
+    end
+    if alive == false then
+      love.graphics.draw(flappyDeadBlue, 125, flappyPosY, math.rad(rotate), 1, 1, 22.5, 22.5)
+    end
+  end
+  
+  if colour == 2 then
+    if alive == true then
+      love.graphics.draw(flappyYellow, 125, flappyPosY, math.rad(rotate), 1, 1, 22.5, 22.5)
+    end
+    if alive == false then
+      love.graphics.draw(flappyDeadYellow, 125, flappyPosY, math.rad(rotate), 1, 1, 22.5, 22.5)
+    end
   end
   
   if alive == false then
